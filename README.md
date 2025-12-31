@@ -1,4 +1,4 @@
-I'm **Artur Guimarães**, a Data Platform Engineer at [Johnson&Johnson](https://www.linkedin.com/company/johnson-&-johnson/posts/?feedView=all) passionate about solving real-world problems through technology.
+I'm **Artur Guimarães**, a Data Platform Engineer at [Tata Consultancy Services](https://www.tcs.com/) passionate about solving real-world problems through technology.
 
 ## Tech Stack
 <div style="display: flex; align-items: center; gap: 10px;">
