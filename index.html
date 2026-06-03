@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Artur Guimarães — Data Platform Engineer</title>
+  <title>afg.dev</title>
   <meta name="description" content="Artur Guimarães — Data Platform Engineer based in São Paulo, Brazil. Building reliable data infrastructure on the cloud." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" type="image/svg+xml" href="public/favicon.svg">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
   <style>
     /* ── Reset & Base ─────────────────────────────────────────── */
@@ -247,6 +248,19 @@
       margin-top: 0.2rem;
     }
 
+    .timeline-logo {
+      display: block;
+      max-width: 64px;
+      max-height: 28px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      margin-top: 0.4rem;
+      margin-left: auto;
+      opacity: 0.75;
+      filter: grayscale(30%);
+    }
+
     .timeline-body h3 {
       font-size: 1rem;
       font-weight: 500;
@@ -426,6 +440,7 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#education">Education</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -483,7 +498,7 @@
         <div class="timeline-item">
           <div class="timeline-meta">
             <p class="timeline-period">Jan 2026 — present</p>
-            <p class="timeline-org">TCS</p>
+            <img src="public/tcs.png" alt="Tata Consultancy Services" class="timeline-logo" loading="lazy" />
           </div>
           <div class="timeline-body timeline-connector">
             <h3>Data Platform Engineer</h3>
@@ -493,8 +508,8 @@
 
         <div class="timeline-item">
           <div class="timeline-meta">
-            <p class="timeline-period">Jan 2024 — Dez 2025</p>
-            <p class="timeline-org">J&amp;J</p>
+            <p class="timeline-period">Jan 2024 — Jan 2026</p>
+            <img src="public/jnj.png" alt="Johnson &amp; Johnson" class="timeline-logo" loading="lazy" />
           </div>
           <div class="timeline-body timeline-connector">
             <h3>IT Intern — Data &amp; Analytics</h3>
@@ -510,12 +525,36 @@
 
         <div class="timeline-item">
           <div class="timeline-meta">
-            <p class="timeline-period">Jan 2023 — Dez 2025</p>
-            <p class="timeline-org">Fatec</p>
+            <p class="timeline-period">Jul 2023 — Dec 2023</p>
+            <img src="public/compass.png" alt="Compass UOL" class="timeline-logo" loading="lazy" />
+          </div>
+          <div class="timeline-body timeline-connector">
+            <h3>Intern — AWS Cognitive Computing</h3>
+            <p>Compass UOL — AWS Scholarship Program focused on Cognitive Computing and Machine Learning.</p>
+            <ul>
+              <li>Trained ML models on AWS SageMaker</li>
+              <li>Built and consumed REST APIs; provisioned infrastructure with Terraform and AWS Lambda</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Education ──────────────────────────────────────────── -->
+  <section id="education">
+    <div class="container fade-in">
+      <p class="section-label">Education</p>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-meta">
+            <img src="public/fatec.png" alt="Fatec Taubaté" class="timeline-logo" loading="lazy" />
           </div>
           <div class="timeline-body timeline-connector">
             <h3>Systems Analysis &amp; Development</h3>
-            <p>Fatec Taubaté — academic program. Notable project: hotel price prediction model using AWS SageMaker, with inference served via a trained model endpoint.</p>
+            <p>Fatec Taubaté — Technology degree in Systems Analysis and Development (CST).</p>
           </div>
         </div>
 
