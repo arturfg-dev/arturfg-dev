@@ -1,0 +1,24 @@
+name: "Deploy Website to OCI VM"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: "Sync to Nginx Server"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Deploy via rsync over SSH
+        uses: sshaction/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "public/*"
+          target: "/var/www/html"
+          strip_components: 1
