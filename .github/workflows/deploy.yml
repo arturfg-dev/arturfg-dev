@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
-      - name: Deploy via rsync over SSH
+      - name: Deploy via scp
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SERVER_IP }}
@@ -22,3 +22,18 @@ jobs:
           source: "public/*"
           target: "/var/www/html"
           strip_components: 1
+
+      - name: Fix permissions
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Flatten if files landed in /var/www/html/public/
+            if [ -d /var/www/html/public ]; then
+              mv /var/www/html/public/* /var/www/html/
+              rm -rf /var/www/html/public
+            fi
+            sudo chown -R ubuntu:ubuntu /var/www/html
+            ls -la /var/www/html/
