@@ -225,40 +225,33 @@
 
     .timeline-item {
       display: grid;
-      grid-template-columns: 140px 1fr;
+      grid-template-columns: 108px 1fr;
       gap: 0 2rem;
+      align-items: start;
     }
 
-    .timeline-meta {
+    .timeline-logo-col {
+      display: flex;
+      justify-content: center;
       padding-top: 0.15rem;
-      text-align: right;
     }
 
     .timeline-period {
+      display: block;
       font-size: 0.75rem;
       font-weight: 400;
       color: var(--muted);
       letter-spacing: 0.03em;
-      white-space: nowrap;
-    }
-
-    .timeline-org {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 0.2rem;
+      margin-bottom: 0.45rem;
     }
 
     .timeline-logo {
       display: block;
-      max-width: 64px;
-      max-height: 28px;
-      width: auto;
-      height: auto;
+      width: 92px;
+      height: 92px;
       object-fit: contain;
-      margin-top: 0.4rem;
-      margin-left: auto;
-      opacity: 0.75;
-      filter: grayscale(30%);
+      opacity: 1;
+      filter: none;
     }
 
     .timeline-body h3 {
@@ -422,7 +415,11 @@
         grid-template-columns: 1fr;
         gap: 0.25rem;
       }
-      .timeline-meta { text-align: left; }
+      .timeline-logo-col {
+        justify-content: flex-start;
+        padding-top: 0;
+        margin-bottom: 0.75rem;
+      }
       .timeline-connector::before { display: none; }
     }
   </style>
@@ -496,22 +493,22 @@
       <div class="timeline">
 
         <div class="timeline-item">
-          <div class="timeline-meta">
-            <p class="timeline-period">Jan 2026 — present</p>
+          <div class="timeline-logo-col">
             <img src="tcs.png" alt="Tata Consultancy Services" class="timeline-logo" loading="lazy" />
           </div>
           <div class="timeline-body timeline-connector">
+            <p class="timeline-period">Jan 2026 — present</p>
             <h3>Data Platform Engineer</h3>
             <p>Tata Consultancy Services — providing services to Johnson &amp; Johnson as a mid-level system analyst. Focused on platform engineering for the MedTech LATAM commercial data lake.</p>
           </div>
         </div>
 
         <div class="timeline-item">
-          <div class="timeline-meta">
-            <p class="timeline-period">Jan 2024 — Jan 2026</p>
+          <div class="timeline-logo-col">
             <img src="jnj.png" alt="Johnson &amp; Johnson" class="timeline-logo" loading="lazy" />
           </div>
           <div class="timeline-body timeline-connector">
+            <p class="timeline-period">Jan 2024 — Jan 2026</p>
             <h3>IT Intern — Data &amp; Analytics</h3>
             <p>Johnson &amp; Johnson — part of the Data &amp; Analytics Chapter at E.D.G.E, supporting the MedTech LATAM commercial data lake.</p>
             <ul>
@@ -524,11 +521,11 @@
         </div>
 
         <div class="timeline-item">
-          <div class="timeline-meta">
-            <p class="timeline-period">Jul 2023 — Dec 2023</p>
+          <div class="timeline-logo-col">
             <img src="compass.png" alt="Compass UOL" class="timeline-logo" loading="lazy" />
           </div>
           <div class="timeline-body timeline-connector">
+            <p class="timeline-period">Jul 2023 — Dec 2023</p>
             <h3>Intern — AWS Cognitive Computing</h3>
             <p>Compass UOL — AWS Scholarship Program focused on Cognitive Computing and Machine Learning.</p>
             <ul>
@@ -549,7 +546,7 @@
       <div class="timeline">
 
         <div class="timeline-item">
-          <div class="timeline-meta">
+          <div class="timeline-logo-col">
             <img src="fatec.png" alt="Fatec Taubaté" class="timeline-logo" loading="lazy" />
           </div>
           <div class="timeline-body timeline-connector">
