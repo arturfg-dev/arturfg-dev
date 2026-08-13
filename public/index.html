@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -95,6 +95,58 @@
     }
     .nav-links a:hover { color: var(--text); }
     .nav-links a:hover::after { width: 100%; }
+
+    .language-toggle {
+      appearance: none;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      cursor: pointer;
+      display: inline-flex;
+      font-family: var(--font);
+      font-size: 0.625rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 0.2rem;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .language-toggle::before {
+      background: var(--text);
+      border-radius: 999px;
+      content: '';
+      height: calc(100% - 0.4rem);
+      left: 0.2rem;
+      position: absolute;
+      top: 0.2rem;
+      transition: transform 0.2s ease;
+      width: calc(50% - 0.2rem);
+    }
+
+    .language-toggle.is-portuguese::before { transform: translateX(100%); }
+
+    .language-toggle span {
+      color: var(--muted);
+      line-height: 1;
+      padding: 0.35rem 0.45rem;
+      position: relative;
+      transition: color 0.2s;
+      z-index: 1;
+    }
+
+    .language-toggle:not(.is-portuguese) .language-en,
+    .language-toggle.is-portuguese .language-pt { color: var(--bg); }
+
+    .language-toggle:hover { border-color: var(--accent); }
+
+    .language-toggle:hover,
+    .language-toggle:focus-visible {
+      border-color: var(--accent);
+      outline: none;
+    }
 
     /* ── Layout helpers ───────────────────────────────────────── */
     .container {
@@ -410,6 +462,7 @@
     @media (max-width: 600px) {
       .nav-links { gap: 1.25rem; }
       .nav-links li:nth-child(n+4) { display: none; } /* hide overflow on tiny screens */
+      .language-toggle { margin-left: 0.75rem; }
 
       .timeline-item {
         grid-template-columns: 1fr;
@@ -433,24 +486,28 @@
       AG
     </a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about" data-i18n="nav.about">About</a></li>
+      <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+      <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+      <li><a href="#certifications" data-i18n="nav.certifications">Certifications</a></li>
+      <li><a href="#education" data-i18n="nav.education">Education</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     </ul>
+    <button class="language-toggle" type="button" aria-label="Mudar para português brasileiro" aria-pressed="false">
+      <span class="language-en">EN-US</span>
+      <span class="language-pt">PT-BR</span>
+    </button>
   </nav>
 
   <!-- ── Hero ───────────────────────────────────────────────── -->
   <section id="hero">
     <div class="container">
-      <p class="hero-eyebrow fade-in">São Paulo, Brazil</p>
+      <p class="hero-eyebrow fade-in" data-i18n="hero.location">São Paulo, Brazil</p>
       <div class="hero-name-row fade-in">
         <img src="pfp.png" alt="Artur Guimarães" class="hero-avatar" />
         <h1>Artur<br>Guimarães</h1>
       </div>
-      <p class="hero-tagline fade-in">Data Platform Engineer — building reliable data infrastructure on the cloud.</p>
+      <p class="hero-tagline fade-in" data-i18n="hero.tagline">Data Platform Engineer — building reliable data infrastructure on the cloud.</p>
       <div class="hero-actions fade-in">
         <a href="https://www.linkedin.com/in/arturguimaraes" target="_blank" rel="noopener noreferrer"
            class="btn-primary" aria-label="View Artur Guimarães on LinkedIn">
@@ -458,7 +515,7 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
           </svg>
-          LinkedIn
+          <span>LinkedIn</span>
         </a>
         <a href="https://github.com/arturfg-dev" target="_blank" rel="noopener noreferrer"
            class="btn-ghost" aria-label="View Artur Guimarães on GitHub">
@@ -466,7 +523,7 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
           </svg>
-          GitHub
+          <span>GitHub</span>
         </a>
       </div>
     </div>
@@ -475,8 +532,8 @@
   <!-- ── About ──────────────────────────────────────────────── -->
   <section id="about">
     <div class="container fade-in">
-      <p class="section-label">About</p>
-      <p>
+      <p class="section-label" data-i18n="about.label">About</p>
+      <p data-i18n="about.body">
         I'm a Data Platform Engineer at Tata Consultancy Services, focused on building and maintaining
         cloud-native data infrastructure. My work centers on Python, PySpark, and AWS — designing
         scalable pipelines, automating ETL processes, and applying the Medallion Architecture to
@@ -489,7 +546,7 @@
   <!-- ── Experience ─────────────────────────────────────────── -->
   <section id="experience">
     <div class="container fade-in">
-      <p class="section-label">Experience</p>
+      <p class="section-label" data-i18n="experience.label">Experience</p>
       <div class="timeline">
 
         <div class="timeline-item">
@@ -497,14 +554,14 @@
             <img src="tcs.png" alt="Tata Consultancy Services" class="timeline-logo" loading="lazy" />
           </div>
           <div class="timeline-body timeline-connector">
-            <p class="timeline-period">Jan 2026 — Present</p>
-            <h3>Mid-level System Analyst</h3>
-            <p>Tata Consultancy Services — Remote</p>
+            <p class="timeline-period" data-i18n="experience.tcs.period">Jan 2026 — Present</p>
+            <h3 data-i18n="experience.tcs.role">Mid-level System Analyst</h3>
+            <p data-i18n="experience.tcs.company">Tata Consultancy Services — Remote</p>
             <ul>
-              <li>Data Platform Engineer supporting the Johnson &amp; Johnson MedTech LATAM commercial Data Lake</li>
-              <li>Architected and deployed a custom Observability API on Kubernetes, centralizing and automating data lineage tracking, SNS topic subscriptions, and job scheduling insights</li>
-              <li>Engineered Salesforce and internal API integrations within the ETL framework, expanding the platform's data ingestion capabilities</li>
-              <li>Managed platform features including JupyterHub on Kubernetes, ensuring high availability and scalability for data engineering teams</li>
+              <li data-i18n="experience.tcs.item1">Data Platform Engineer supporting the Johnson &amp; Johnson MedTech LATAM commercial Data Lake</li>
+              <li data-i18n="experience.tcs.item2">Architected and deployed a custom Observability API on Kubernetes, centralizing and automating data lineage tracking, SNS topic subscriptions, and job scheduling insights</li>
+              <li data-i18n="experience.tcs.item3">Engineered Salesforce and internal API integrations within the ETL framework, expanding the platform's data ingestion capabilities</li>
+              <li data-i18n="experience.tcs.item4">Managed platform features including JupyterHub on Kubernetes, ensuring high availability and scalability for data engineering teams</li>
             </ul>
           </div>
         </div>
@@ -514,14 +571,14 @@
             <img src="jnj.png" alt="Johnson &amp; Johnson" class="timeline-logo" loading="lazy" />
           </div>
           <div class="timeline-body timeline-connector">
-            <p class="timeline-period">Jan 2024 — Dec 2025</p>
-            <h3>Data &amp; Analytics Intern</h3>
-            <p>Johnson &amp; Johnson — São José dos Campos</p>
+            <p class="timeline-period" data-i18n="experience.jnj.period">Jan 2024 — Dec 2025</p>
+            <h3 data-i18n="experience.jnj.role">Data &amp; Analytics Intern</h3>
+            <p data-i18n="experience.jnj.company">Johnson &amp; Johnson — São José dos Campos</p>
             <ul>
-              <li>Part of the Johnson &amp; Johnson IT Internship Program, focused on data products for MedTech and Innovative Medicine LATAM</li>
-              <li>Developed standardized and scalable ETL pipelines using AWS Glue, Lambda, EventBridge, and Step Functions</li>
-              <li>Developed a GenAI workflow to automate core ingestion configuration files, reducing manual overhead and speeding up data onboarding</li>
-              <li>Collaborated on a Python framework for creating and maintaining a data lake based on Delta Tables</li>
+              <li data-i18n="experience.jnj.item1">Part of the Johnson &amp; Johnson IT Internship Program, focused on data products for MedTech and Innovative Medicine LATAM</li>
+              <li data-i18n="experience.jnj.item2">Developed standardized and scalable ETL pipelines using AWS Glue, Lambda, EventBridge, and Step Functions</li>
+              <li data-i18n="experience.jnj.item3">Developed a GenAI workflow to automate core ingestion configuration files, reducing manual overhead and speeding up data onboarding</li>
+              <li data-i18n="experience.jnj.item4">Collaborated on a Python framework for creating and maintaining a data lake based on Delta Tables</li>
             </ul>
           </div>
         </div>
@@ -531,9 +588,9 @@
             <img src="compass.png" alt="Compass UOL" class="timeline-logo" loading="lazy" />
           </div>
           <div class="timeline-body timeline-connector">
-            <p class="timeline-period">Jul 2023 — Dec 2023</p>
-            <h3>AI &amp; ML Intern</h3>
-            <p>Compass UOL — Remote. Participated in the 5-month Compass UOL Internship Program, focused on machine learning, cognitive computing, and Amazon Web Services (AWS).</p>
+            <p class="timeline-period" data-i18n="experience.compass.period">Jul 2023 — Dec 2023</p>
+            <h3 data-i18n="experience.compass.role">AI &amp; ML Intern</h3>
+            <p data-i18n="experience.compass.body">Compass UOL — Remote. Participated in the 5-month Compass UOL Internship Program, focused on machine learning, cognitive computing, and Amazon Web Services (AWS).</p>
           </div>
         </div>
 
@@ -544,7 +601,7 @@
   <!-- ── Education ──────────────────────────────────────────── -->
   <section id="education">
     <div class="container fade-in">
-      <p class="section-label">Education</p>
+      <p class="section-label" data-i18n="education.label">Education</p>
       <div class="timeline">
 
         <div class="timeline-item">
@@ -552,8 +609,8 @@
             <img src="fatec.png" alt="Fatec Taubaté" class="timeline-logo" loading="lazy" />
           </div>
           <div class="timeline-body timeline-connector">
-            <h3>Systems Analysis &amp; Development</h3>
-            <p>Fatec Taubaté — Technology degree in Systems Analysis and Development (CST).</p>
+            <h3 data-i18n="education.degree">Systems Analysis &amp; Development</h3>
+            <p data-i18n="education.body">Fatec Taubaté — Technology degree in Systems Analysis and Development (CST).</p>
           </div>
         </div>
 
@@ -564,11 +621,11 @@
   <!-- ── Skills ─────────────────────────────────────────────── -->
   <section id="skills">
     <div class="container fade-in">
-      <p class="section-label">Skills</p>
+      <p class="section-label" data-i18n="skills.label">Skills</p>
       <div class="skill-groups">
 
         <div class="skill-group">
-          <h4>Languages &amp; Frameworks</h4>
+          <h4 data-i18n="skills.languages">Languages &amp; Frameworks</h4>
           <div class="skill-tags">
             <span class="skill-tag">
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="" />
@@ -590,7 +647,7 @@
         </div>
 
         <div class="skill-group">
-          <h4>Cloud &amp; Infrastructure</h4>
+          <h4 data-i18n="skills.cloud">Cloud &amp; Infrastructure</h4>
           <div class="skill-tags">
             <span class="skill-tag">
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="" />
@@ -612,7 +669,7 @@
         </div>
 
         <div class="skill-group">
-          <h4>Data Engineering</h4>
+          <h4 data-i18n="skills.data">Data Engineering</h4>
           <div class="skill-tags">
             <span class="skill-tag">
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachespark/apachespark-original.svg" alt="" />
@@ -626,7 +683,7 @@
         </div>
 
         <div class="skill-group">
-          <h4>DevOps &amp; Tooling</h4>
+          <h4 data-i18n="skills.devops">DevOps &amp; Tooling</h4>
           <div class="skill-tags">
             <span class="skill-tag">
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="" />
@@ -658,7 +715,7 @@
   <!-- ── Certifications ─────────────────────────────────────── -->
   <section id="certifications">
     <div class="container fade-in">
-      <p class="section-label">Certifications</p>
+      <p class="section-label" data-i18n="certifications.label">Certifications</p>
       <a
         href="https://www.credly.com/badges/5130eb1f-b81b-43da-85a1-8933f9d67e1a/linked_in_profile"
         target="_blank"
@@ -682,10 +739,10 @@
   <!-- ── Contact ─────────────────────────────────────── -->
   <section id="contact">
     <div class="container fade-in">
-      <p class="section-label">Contact</p>
+      <p class="section-label" data-i18n="contact.label">Contact</p>
       <div class="contact-links">
         <div class="contact-item">
-          <p class="contact-label">Let's connect on LinkedIn</p>
+          <p class="contact-label" data-i18n="contact.linkedin">Let's connect on LinkedIn</p>
           <a
             href="https://www.linkedin.com/in/arturguimaraes"
             target="_blank"
@@ -700,7 +757,7 @@
           </a>
         </div>
         <div class="contact-item">
-          <p class="contact-label">Or drop me an email</p>
+          <p class="contact-label" data-i18n="contact.email">Or drop me an email</p>
           <a
             href="mailto:arturfg.cloud@gmail.com"
             class="contact-link"
@@ -723,6 +780,80 @@
 
   <!-- ── Scroll fade-in ──────────────────────────────────────── -->
   <script>
+    const translations = {
+      'pt-BR': {
+        'nav.about': 'Sobre',
+        'nav.experience': 'Experiência',
+        'nav.skills': 'Competências',
+        'nav.certifications': 'Certificações',
+        'nav.education': 'Formação',
+        'nav.contact': 'Contato',
+        'hero.location': 'São Paulo, Brasil',
+        'hero.tagline': 'Engenheiro de Plataforma de Dados — construindo infraestrutura de dados confiável na nuvem.',
+        'about.label': 'Sobre',
+        'about.body': 'Sou Engenheiro de Plataforma de Dados na Tata Consultancy Services, com foco na construção e manutenção de infraestrutura de dados nativa em nuvem. Meu trabalho é centrado em Python, PySpark e AWS — projetando pipelines escaláveis, automatizando processos de ETL e aplicando a Arquitetura Medalhão a data lakes comerciais reais. Gosto de resolver problemas complexos de infraestrutura com engenharia limpa e intencional, e estou em São Paulo, Brasil.',
+        'experience.label': 'Experiência',
+        'experience.tcs.period': 'Jan 2026 — Atualmente',
+        'experience.tcs.role': 'Analista de Sistemas Pleno',
+        'experience.tcs.company': 'Tata Consultancy Services — Remoto',
+        'experience.tcs.item1': 'Engenheiro de Plataforma de Dados apoiando o Data Lake comercial de MedTech LATAM da Johnson & Johnson',
+        'experience.tcs.item2': 'Projetei e implantei uma API de Observabilidade personalizada no Kubernetes, centralizando e automatizando o rastreamento de linhagem de dados, assinaturas de tópicos SNS e informações de agendamento de jobs',
+        'experience.tcs.item3': 'Implementei integrações com Salesforce e APIs internas no framework de ETL, expandindo as capacidades de ingestão de dados da plataforma',
+        'experience.tcs.item4': 'Gerenciei recursos da plataforma, incluindo JupyterHub no Kubernetes, garantindo alta disponibilidade e escalabilidade para equipes de engenharia de dados',
+        'experience.jnj.period': 'Jan 2024 — Dez 2025',
+        'experience.jnj.role': 'Estagiário de Dados e Analytics',
+        'experience.jnj.company': 'Johnson & Johnson — São José dos Campos',
+        'experience.jnj.item1': 'Participei do programa de estágio de TI da Johnson & Johnson, com foco em produtos de dados para MedTech e Innovative Medicine LATAM',
+        'experience.jnj.item2': 'Desenvolvi pipelines de ETL padronizados e escaláveis usando AWS Glue, Lambda, EventBridge e Step Functions',
+        'experience.jnj.item3': 'Desenvolvi um fluxo de GenAI para automatizar arquivos de configuração essenciais de ingestão, reduzindo trabalho manual e acelerando a entrada de dados',
+        'experience.jnj.item4': 'Colaborei em um framework Python para criar e manter um data lake baseado em tabelas Delta',
+        'experience.compass.period': 'Jul 2023 — Dez 2023',
+        'experience.compass.role': 'Estagiário de IA e ML',
+        'experience.compass.body': 'Compass UOL — Remoto. Participei do programa de estágio de 5 meses da Compass UOL, com foco em machine learning, computação cognitiva e Amazon Web Services (AWS).',
+        'education.label': 'Formação',
+        'education.degree': 'Análise e Desenvolvimento de Sistemas',
+        'education.body': 'Fatec Taubaté — Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas (CST).',
+        'skills.label': 'Competências',
+        'skills.languages': 'Linguagens e Frameworks',
+        'skills.cloud': 'Nuvem e Infraestrutura',
+        'skills.data': 'Engenharia de Dados',
+        'skills.devops': 'DevOps e Ferramentas',
+        'certifications.label': 'Certificações',
+        'contact.label': 'Contato',
+        'contact.linkedin': 'Vamos nos conectar no LinkedIn',
+        'contact.email': 'Ou envie um e-mail'
+      }
+    };
+
+    const defaultText = Object.fromEntries(
+      [...document.querySelectorAll('[data-i18n]')].map(element => [element.dataset.i18n, element.textContent.trim()])
+    );
+    const languageToggle = document.querySelector('.language-toggle');
+
+    function setLanguage(language) {
+      const copy = language === 'pt-BR' ? translations['pt-BR'] : defaultText;
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        element.textContent = copy[element.dataset.i18n];
+      });
+
+      const isPortuguese = language === 'pt-BR';
+      document.documentElement.lang = language;
+      document.title = 'afg.dev';
+      document.querySelector('meta[name="description"]').content = isPortuguese
+        ? 'Artur Guimarães — Engenheiro de Plataforma de Dados em São Paulo, Brasil. Construindo infraestrutura de dados confiável na nuvem.'
+        : 'Artur Guimarães — Data Platform Engineer based in São Paulo, Brazil. Building reliable data infrastructure on the cloud.';
+      languageToggle.classList.toggle('is-portuguese', isPortuguese);
+      languageToggle.setAttribute('aria-label', isPortuguese ? 'Switch to English' : 'Mudar para português brasileiro');
+      languageToggle.setAttribute('aria-pressed', String(isPortuguese));
+      localStorage.setItem('preferred-language', language);
+    }
+
+    languageToggle.addEventListener('click', () => {
+      setLanguage(document.documentElement.lang === 'pt-BR' ? 'en-US' : 'pt-BR');
+    });
+
+    setLanguage(localStorage.getItem('preferred-language') === 'pt-BR' ? 'pt-BR' : 'en-US');
+
     const observer = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
       { threshold: 0.12 }
